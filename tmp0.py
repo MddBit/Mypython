@@ -111,7 +111,5 @@ if __name__ == '__main__':
 
     # 单引擎CRUD my.log查看执行日志
     execute_etl_sql(0,"""
-ALTER TABLE realtime_dwd.dwd_call_assignment_record ADD COLUMNS(sc_business_type_id int NOT NULL DEFAULT 0 comment '线索小类');
-ALTER TABLE realtime_dwd.dwd_call_assignment_record ADD COLUMNS(big_business_type_id int NOT NULL DEFAULT 0 comment '线索大类')
-""")
-                   
+    INVALIDATE METADATA realtime_dwd.dwd_auction_bid 
+    """)
