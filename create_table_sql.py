@@ -29,12 +29,12 @@ def default_value(col_type):
 
 
 path1 = '/Users/mdd/Documents/src/Mypython/table_metadata/' # ods元数据
-path2 = '/Users/mdd/Documents/src/Mypython/all_sql_str.sql' # 结果输出，建表语句
+path2 = '/Users/mdd/Documents/src/Mypython/create_ods/' # 结果输出，建表语句
 metadata_book_list = os.listdir(path1)
 metadata_book_list.remove('.DS_Store')
 
 
-f = open(path2, 'a')
+# f = open(path2, 'a')
 for book in metadata_book_list:
     
     sheet_list = pd.read_excel(path1 + book, sheet_name=None)
@@ -65,8 +65,10 @@ for book in metadata_book_list:
         sql_str += ") PARTITION BY HASH (" + table_metadata['name'][col_min_index] + ')\n'
         sql_str += "PARTITIONS 8 STORED AS KUDU TBLPROPERTIES ('kudu.master_addresses'='{KUDU_MASTER_ADDRESSES}')"
         
+        f = open(path2 + table_name + '.sql', 'a')
+        
         f.write(sql_str)
         f.write("\n\n")
-f.close()
+        f.close()
 
     
